@@ -6,7 +6,7 @@ from calculator_1 import mul, add, sub, div
 def main():
     if len(sys.argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
-        return (1)
+        sys.exit(1)
     if (
         sys.argv[2] != "*"
         and sys.argv[2] != "+"
@@ -14,7 +14,7 @@ def main():
         and sys.argv[2] != "/"
     ):
         print("Unknown operator. Available operators: +, -, * and /")
-        return (1)
+        sys.exit(1)
 
     if sys.argv[2] == "*":
         result = mul(int(sys.argv[1]), int(sys.argv[3]))
