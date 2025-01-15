@@ -30,5 +30,5 @@ def main():
         print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
 
 
-if __name__ == "__main__" and __name__ == '__main__':
+if __name__ == "__main__":
     main()
