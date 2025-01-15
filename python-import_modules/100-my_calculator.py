@@ -30,7 +30,7 @@ def main():
         print(result)
     elif sys.argv[2] == "/":
         result = div(int(sys.argv[1]), int(sys.argv[3]))
-        print("{} {} {} = ".format(sys.argv[1], sys.argv[2], sys.argv[3]), end="")
+        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = ", end="")
         print(result)
 
 
