@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import sys
-from calculator_1 import *
+from calculator_1 import mul, add, sub, div
 
 
 def main():
@@ -24,10 +24,10 @@ def main():
         print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
     elif sys.argv[2] == '-':
         result = sub(int(sys.argv[1]), int(sys.argv[3]))
-        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result} ")
+        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
     elif sys.argv[2] == '/':
         result = div(int(sys.argv[1]), int(sys.argv[3]))
-        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result} ")
+        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
 
 
 if __name__ == "__main__":
