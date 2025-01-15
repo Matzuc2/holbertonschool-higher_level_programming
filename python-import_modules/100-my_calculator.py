@@ -4,7 +4,7 @@ from calculator_1 import mul, add, sub, div
 
 
 def main():
-    if len(sys.argv) != 4:
+    if len(sys.argv[1:]) != 3:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
     if (
@@ -30,5 +30,5 @@ def main():
         print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__" and __name__ == '__main__':
     main()
