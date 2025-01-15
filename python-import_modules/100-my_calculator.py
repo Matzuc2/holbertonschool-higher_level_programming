@@ -4,30 +4,33 @@ from calculator_1 import mul, add, sub, div
 
 
 def main():
-    if len(sys.argv[1:]) != 3:
+    a = int(sys.argv[1])
+    b = int(sys.argv[3])
+    operator = sys.argv[2]
+    if len(sys.argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
     if (
-        sys.argv[2] != '*'
-        and sys.argv[2] != '+'
-        and sys.argv[2] != '-'
-        and sys.argv[2] != '/'
+        operator != '*'
+        and operator != '+'
+        and operator != '-'
+        and operator != '/'
     ):
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
 
-    if sys.argv[2] == '*':
-        result = mul(int(sys.argv[1]), int(sys.argv[3]))
-        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
-    elif sys.argv[2] == '+':
-        result = add(int(sys.argv[1]), int(sys.argv[3]))
-        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
-    elif sys.argv[2] == '-':
-        result = sub(int(sys.argv[1]), int(sys.argv[3]))
-        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
-    elif sys.argv[2] == '/':
-        result = div(int(sys.argv[1]), int(sys.argv[3]))
-        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = {result}")
+    if operator == '*':
+        result = mul(a, b)
+        print(f"{a} {operator} {b} = {result}")
+    elif operator == '+':
+        result = add(a, b)
+        print(f"{a} {operator} {b} = {result}")
+    elif operator == '-':
+        result = sub(a, b)
+        print(f"{a} {operator} {b} = {result}")
+    elif operator == '/':
+        result = div(a, b)
+        print(f"{a} {operator} {b} = {result}")
 
 
 if __name__ == "__main__":
