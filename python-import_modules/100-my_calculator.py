@@ -18,19 +18,19 @@ def main():
 
     if sys.argv[2] == "*":
         result = mul(int(sys.argv[1]), int(sys.argv[3]))
-        print("{} * {} = ".format(sys.argv[1], sys.argv[3]), end="")
+        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = ", end="")
         print(result)
     elif sys.argv[2] == "+":
         result = add(int(sys.argv[1]), int(sys.argv[3]))
-        print("{} + {} = ".format(sys.argv[1], sys.argv[3]), end="")
+        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = ", end="")
         print(result)
     elif sys.argv[2] == "-":
         result = sub(int(sys.argv[1]), int(sys.argv[3]))
-        print("{} - {} = ".format(sys.argv[1], sys.argv[3]), end="")
+        print(f"{sys.argv[1]} {sys.argv[2]} {sys.argv[3]} = ", end="")
         print(result)
     elif sys.argv[2] == "/":
         result = div(int(sys.argv[1]), int(sys.argv[3]))
-        print("{} / {} = ".format(sys.argv[1], sys.argv[3]), end="")
+        print("{} {} {} = ".format(sys.argv[1], sys.argv[2], sys.argv[3]), end="")
         print(result)
 
 
