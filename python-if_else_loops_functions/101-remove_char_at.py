@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 def remove_char_at(str, n):
-    if n == None:
+    if n is None:
         return (str)
     if n > len(str):
-        return(str)
-    if str == None or str == "":
+        return (str)
+    if str is None or str == "":
         return (None)
     str1 = ""
     for i in range(len(str)):
