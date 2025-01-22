@@ -6,5 +6,6 @@ def square_matrix_simple(matrix=[]):
         new_matrix.append(new_row)
     return new_matrix
 
+
 def square(a):
     return a*a
