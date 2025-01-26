@@ -1,15 +1,10 @@
 #!/usr/bin/python3
 def print_square(size):
-    if isinstance(size, bool):
-        raise TypeError("size must be an integer")
-    if not isinstance(size, int):
+    if type(size) is not int:
         raise TypeError("size must be an integer")
     if size < 0:
         raise ValueError("size must be >= 0")
-    if isinstance(size, float):
-        if size < 0:
-            raise TypeError("size must be an integer")
-    if size == 0:
-        return
-    for _ in range(size):
-        print('#' * size)
+    if isinstance(size, float) and size < 0:
+        raise TypeError("size must be an integer")
+    for i in range(size):
+        print("#" * size)
