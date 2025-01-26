@@ -1,11 +1,17 @@
 #!/usr/bin/python3
+""" Module that print a text with 2 new lines"""
+
+
 def text_indentation(text):
-    if not isinstance(text, str):
+    if type(text) is not str:
         raise TypeError("text must be a string")
-    i = 0
-    while i < len(text):
-        print(text[i], end="")
-        if text[i] in '.?:':
-            print()
-            print()
-        i += 1
+
+    s = text[:]
+
+    for d in ".?:":
+        list_text = s.split(d)
+        s = ""
+        for i in list_text:
+            i = i.strip(" ")
+            s = i + d if s is "" else s + "\n\n" + i + d
+    print(s[:-3], end="")
