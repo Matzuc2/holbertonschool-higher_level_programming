@@ -1,0 +1,204 @@
+The ``5-text_indentation`` module
+=================================
+
+Using ``text_indentation``
+--------------------------
+
+Import function from module:
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Basic valid test cases
+----------------------
+Test with a simple sentence:
+    >>> text_indentation("Hello. How are you?")
+    Hello.
+    
+    How are you?
+
+Test with multiple sentences:
+    >>> text_indentation("This is a sentence. Here is another one? And finally a third one:")
+    This is a sentence.
+    
+    Here is another one?
+    
+    And finally a third one:
+
+Test with no punctuation:
+    >>> text_indentation("This is a simple text with no punctuation")
+    This is a simple text with no punctuation
+
+Test with multiple punctuation marks:
+    >>> text_indentation("Hello... How are you??? I'm fine!!!")
+    Hello.
+
+    How are you?
+
+    I'm fine!
+
+Test with punctuation at the beginning:
+    >>> text_indentation(". This is a sentence starting with a punctuation")
+    (empty line)
+    This is a sentence starting with a punctuation
+
+Test with punctuation at the end:
+    >>> text_indentation("This is a sentence. Ending with a punctuation.")
+    This is a sentence.
+    
+    Ending with a punctuation.
+
+Edge cases
+----------
+Test with text having no punctuation marks:
+    >>> text_indentation("Just a text without punctuation")
+    Just a text without punctuation
+
+Test with multiple spaces before punctuation:
+    >>> text_indentation("This is a sentence      .   With extra spaces")
+    This is a sentence.
+
+    With extra spaces
+
+Test with a single space after punctuation:
+    >>> text_indentation("This is a sentence. Then a new sentence? And another one: ")
+    This is a sentence.
+    
+    Then a new sentence?
+    
+    And another one:
+
+Test with multiple spaces and tabs mixed in the input:
+    >>> text_indentation("This is a sentence.     \t     Then another one?\t    And a third one:")
+    This is a sentence.
+    
+    Then another one?
+    
+    And a third one:
+
+Test with empty string:
+    >>> text_indentation("")
+    (empty output)
+
+Test with sentence having punctuation but no actual space in between:
+    >>> text_indentation("Hello.World")
+    Hello.World
+
+Test with punctuation at the end of the input:
+    >>> text_indentation("This is a test sentence. End punctuation.")
+    This is a test sentence.
+    
+    End punctuation.
+
+Invalid inputs (TypeError expected)
+-----------------------------------
+Test with a number instead of string:
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with a list instead of string:
+    >>> text_indentation(["This is a list"])
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with a tuple instead of string:
+    >>> text_indentation(("This", "is", "a", "tuple"))
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with a dictionary instead of string:
+    >>> text_indentation({"sentence": "This is a dictionary"})
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with a boolean value instead of string:
+    >>> text_indentation(True)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with a float instead of string:
+    >>> text_indentation(12.34)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with None instead of string:
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Test with complex number instead of string:
+    >>> text_indentation(3 + 2j)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+Special cases
+-------------
+Test with text containing only one punctuation mark:
+    >>> text_indentation("Hello? ")
+    Hello?
+    
+Test with text containing only punctuation marks:
+    >>> text_indentation("... ?!? :::")
+    (empty line)
+    (empty line)
+    (empty line)
+    
+    (empty line)
+    (empty line)
+    (empty line)
+    
+    (empty line)
+
+Test with extra spaces and newlines in between sentences:
+    >>> text_indentation("Hello   .   How are you? \n\n  I'm fine : ")
+    Hello.
+    
+    How are you?
+
+    I'm fine :
+
+Test with multiple newlines separating text:
+    >>> text_indentation("This is sentence one. \n\n\nAnd sentence two?")
+    This is sentence one.
+    
+    And sentence two?
+
+Test with multiple punctuation marks together:
+    >>> text_indentation("Hello... How are you??? I'm fine:  ")
+    Hello.
+    
+    How are you?
+    
+    I'm fine:
+
+Test with a string with leading spaces:
+    >>> text_indentation("   Hello.   How are you?")
+    Hello.
+    
+    How are you?
+
+Test with a string containing leading and trailing spaces:
+    >>> text_indentation("   Hello.   How are you?   ")
+    Hello.
+    
+    How are you?
+
+Test with string containing tabs:
+    >>> text_indentation("\tHello. How are you?\t")
+    Hello.
+    
+    How are you?
+
+Test with a sentence with multiple punctuation at the start:
+    >>> text_indentation("!!! Hello. How are you?")
+    (empty line)
+    Hello.
+    
+    How are you?
+
+Test with mixed punctuation marks and space:
+    >>> text_indentation("Hello.. How are you? !")
+    Hello.
+    
+    How are you?
+    
+    !

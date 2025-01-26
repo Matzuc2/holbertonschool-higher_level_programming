@@ -127,3 +127,16 @@ Test with scientific notation (should fail):
     >>> print_square(1e2)
     Traceback (most recent call last):
     TypeError: size must be an integer
+
+Test large square:
+    >>> print_square(10)
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
