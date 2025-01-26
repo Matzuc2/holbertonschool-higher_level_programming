@@ -7,198 +7,177 @@ Using ``text_indentation``
 Import function from module:
     >>> text_indentation = __import__('5-text_indentation').text_indentation
 
-Basic valid test cases
-----------------------
-Test with a simple sentence:
-    >>> text_indentation("Hello. How are you?")
-    Hello.
-    
-    How are you?
+Test single character:
+    >>> text_indentation("a")
+    a
 
-Test with multiple sentences:
-    >>> text_indentation("This is a sentence. Here is another one? And finally a third one:")
-    This is a sentence.
-    
-    Here is another one?
-    
-    And finally a third one:
+Test single delimiter:
+    >>> text_indentation(".")
+    .
+    <BLANKLINE>
 
-Test with no punctuation:
-    >>> text_indentation("This is a simple text with no punctuation")
-    This is a simple text with no punctuation
+Test leading/trailing whitespace:
+    >>> text_indentation("  Hello  ")
+    Hello
 
-Test with multiple punctuation marks:
-    >>> text_indentation("Hello... How are you??? I'm fine!!!")
-    Hello.
+Test multiple newlines:
+    >>> text_indentation("Line1\n\nLine2")
+    Line1
+    <BLANKLINE>
+    Line2
 
-    How are you?
+Test all delimiters:
+    >>> text_indentation("First.Second?Third:Fourth")
+    First.
+    <BLANKLINE>
+    Second?
+    <BLANKLINE> 
+    Third:
+    <BLANKLINE>
+    Fourth
 
-    I'm fine!
+Test unicode:
+    >>> text_indentation(u"Hello©.World™?Done®")
+    Hello©.
+    <BLANKLINE>
+    World™?
+    <BLANKLINE>
+    Done®
 
-Test with punctuation at the beginning:
-    >>> text_indentation(". This is a sentence starting with a punctuation")
-    (empty line)
-    This is a sentence starting with a punctuation
+Test empty line breaks:
+    >>> text_indentation("Line1\n\n\nLine2")
+    Line1
+    <BLANKLINE>
+    <BLANKLINE>
+    Line2
 
-Test with punctuation at the end:
-    >>> text_indentation("This is a sentence. Ending with a punctuation.")
-    This is a sentence.
-    
-    Ending with a punctuation.
-
-Edge cases
-----------
-Test with text having no punctuation marks:
-    >>> text_indentation("Just a text without punctuation")
-    Just a text without punctuation
-
-Test with multiple spaces before punctuation:
-    >>> text_indentation("This is a sentence      .   With extra spaces")
-    This is a sentence.
-
-    With extra spaces
-
-Test with a single space after punctuation:
-    >>> text_indentation("This is a sentence. Then a new sentence? And another one: ")
-    This is a sentence.
-    
-    Then a new sentence?
-    
-    And another one:
-
-Test with multiple spaces and tabs mixed in the input:
-    >>> text_indentation("This is a sentence.     \t     Then another one?\t    And a third one:")
-    This is a sentence.
-    
-    Then another one?
-    
-    And a third one:
-
-Test with empty string:
-    >>> text_indentation("")
-    (empty output)
-
-Test with sentence having punctuation but no actual space in between:
-    >>> text_indentation("Hello.World")
-    Hello.World
-
-Test with punctuation at the end of the input:
-    >>> text_indentation("This is a test sentence. End punctuation.")
-    This is a test sentence.
-    
-    End punctuation.
-
-Invalid inputs (TypeError expected)
------------------------------------
-Test with a number instead of string:
-    >>> text_indentation(123)
+Test list input:
+    >>> text_indentation(["Hello"])
     Traceback (most recent call last):
+    ...
     TypeError: text must be a string
 
-Test with a list instead of string:
-    >>> text_indentation(["This is a list"])
-    Traceback (most recent call last):
-    TypeError: text must be a string
-
-Test with a tuple instead of string:
-    >>> text_indentation(("This", "is", "a", "tuple"))
-    Traceback (most recent call last):
-    TypeError: text must be a string
-
-Test with a dictionary instead of string:
-    >>> text_indentation({"sentence": "This is a dictionary"})
-    Traceback (most recent call last):
-    TypeError: text must be a string
-
-Test with a boolean value instead of string:
+Test bool input:
     >>> text_indentation(True)
     Traceback (most recent call last):
+    ...
     TypeError: text must be a string
 
-Test with a float instead of string:
-    >>> text_indentation(12.34)
-    Traceback (most recent call last):
-    TypeError: text must be a string
+Printing a large message
 
-Test with None instead of string:
+    >>> text_indentation("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? Non autem hoc: igitur ne illud quidem. Fortasse id optimum, sed ubi illud: Plus semper voluptatis? Teneo, inquit, finem illi videri nihil dolere. Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens. Si id dicis, vicimus. Inde sermone vario sex illa a Dipylo stadia confecimus. Sin aliud quid voles, postea. Quae animi affectio suum cuique tribuens atque hanc, quam dico. Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres""")
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Utrum igitur tibi litteram videor an totas paginas commovere?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne illud quidem.
+    <BLANKLINE>
+    Fortasse id optimum, sed ubi illud:
+    <BLANKLINE>
+    Plus semper voluptatis?
+    <BLANKLINE>
+    Teneo, inquit, finem illi videri nihil dolere.
+    <BLANKLINE>
+    Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens.
+    <BLANKLINE>
+    Si id dicis, vicimus.
+    <BLANKLINE>
+    Inde sermone vario sex illa a Dipylo stadia confecimus.
+    <BLANKLINE>
+    Sin aliud quid voles, postea.
+    <BLANKLINE>
+    Quae animi affectio suum cuique tribuens atque hanc, quam dico.
+    <BLANKLINE>
+    Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres
+
+Printing a word with spaces around
+
+    >>> text_indentation("    Holberton    ")
+    Holberton
+
+Printing a word with a special character at the end
+
+    >>> text_indentation("    Hello    .")
+    Hello.
+    <BLANKLINE>
+
+Printing all special characters
+
+    >>> text_indentation(".?:")
+    .
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+
+Passing Node as a text
+
     >>> text_indentation(None)
     Traceback (most recent call last):
+    	      ...
     TypeError: text must be a string
 
-Test with complex number instead of string:
-    >>> text_indentation(3 + 2j)
+Passing a number as a text
+
+    >>> text_indentation(10)
     Traceback (most recent call last):
+    	      ...
     TypeError: text must be a string
 
-Special cases
--------------
-Test with text containing only one punctuation mark:
-    >>> text_indentation("Hello? ")
-    Hello?
-    
-Test with text containing only punctuation marks:
-    >>> text_indentation("... ?!? :::")
-    (empty line)
-    (empty line)
-    (empty line)
-    
-    (empty line)
-    (empty line)
-    (empty line)
-    
-    (empty line)
+Printing a text with special characters
 
-Test with extra spaces and newlines in between sentences:
-    >>> text_indentation("Hello   .   How are you? \n\n  I'm fine : ")
-    Hello.
-    
-    How are you?
+    >>> text_indentation("Betty: Holberton? Python is. cool   ")
+    Betty:
+    <BLANKLINE>
+    Holberton?
+    <BLANKLINE>
+    Python is.
+    <BLANKLINE>
+    cool
 
-    I'm fine :
+Printing a char number
 
-Test with multiple newlines separating text:
-    >>> text_indentation("This is sentence one. \n\n\nAnd sentence two?")
-    This is sentence one.
-    
-    And sentence two?
+    >>> text_indentation('2')
+    2
 
-Test with multiple punctuation marks together:
-    >>> text_indentation("Hello... How are you??? I'm fine:  ")
-    Hello.
-    
-    How are you?
-    
-    I'm fine:
+Passing an empty string
 
-Test with a string with leading spaces:
-    >>> text_indentation("   Hello.   How are you?")
-    Hello.
-    
-    How are you?
+    >>> text_indentation('    ')
 
-Test with a string containing leading and trailing spaces:
-    >>> text_indentation("   Hello.   How are you?   ")
-    Hello.
-    
-    How are you?
+Passing a new line as a text
 
-Test with string containing tabs:
-    >>> text_indentation("\tHello. How are you?\t")
-    Hello.
-    
-    How are you?
+    >>> text_indentation('\n')
+    <BLANKLINE>
 
-Test with a sentence with multiple punctuation at the start:
-    >>> text_indentation("!!! Hello. How are you?")
-    (empty line)
-    Hello.
-    
-    How are you?
+Passing a special character and some special characters
 
-Test with mixed punctuation marks and space:
-    >>> text_indentation("Hello.. How are you? !")
-    Hello.
-    
-    How are you?
-    
-    !
+    >>> text_indentation('\n.\n?\n:')
+    <BLANKLINE>
+    .
+    <BLANKLINE>
+    <BLANKLINE>
+    ?
+    <BLANKLINE>
+    <BLANKLINE>
+    :
+    <BLANKLINE>
+
+Passing a text with spaces and one new line
+
+    >>> text_indentation("   \n")
+    <BLANKLINE>
+
+Passing a text with spaces and one new line 2
+
+   >>> text_indentation("   \n   ")
+   <BLANKLINE>
+
+Passing a text with spaces and one new line 3
+
+   >>> text_indentation("\n   ")
+   <BLANKLINE>
