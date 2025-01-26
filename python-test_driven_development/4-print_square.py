@@ -1,5 +1,5 @@
+#!/usr/bin/python3
 def print_square(size):
-    # Vérifier si size est un booléen
     if isinstance(size, bool):
         raise TypeError("size must be an integer")
     if not isinstance(size, int):
