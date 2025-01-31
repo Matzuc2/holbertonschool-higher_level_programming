@@ -32,8 +32,8 @@ class Square:
              is not a tuple of 2 positive integers.
             ValueError: If size is negative.
         """
-        self.size = size
-        self.position = position
+        self.__size = size
+        self.__position = position
 
     def area(self):
         """
@@ -110,13 +110,12 @@ class Square:
         """
         if self.__size == 0:
             print()
-        if self.__position[1] > 0:
+        else:
             for h in range(self.__position[1]):
-                    print()
-        if self.__position[1] == 0:
+                print()
             for i in range(0, self.__size):
                 for n in range(self.__position[0]):
-                        print(" ", end="")
+                    print(" ", end="")
                 for j in range(0, self.__size):
                     print('#', end="")
                 print()
