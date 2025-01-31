@@ -1,3 +1,13 @@
+#!/usr/bin/python3
+"""
+This module defines the `Rectangle` class.
+The class provides functionality to create a rectangle
+ object with width and height,
+calculate its area and perimeter, and print a visual
+representation of the rectangle.
+"""
+
+
 class Rectangle:
     """
     Represents a rectangle with a specific width and height.
