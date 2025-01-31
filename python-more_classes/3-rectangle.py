@@ -112,7 +112,7 @@ class Rectangle:
             an empty string if width or height is 0.
         """
         str = ""
-        if self.__height == 0 or self.__width == 0:
+        if self.__height != 0 and self.__width != 0:
             for i in range(self.__height):
                 for j in range(self.__width):
                     str += "#"
