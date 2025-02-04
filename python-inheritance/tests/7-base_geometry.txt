@@ -1,99 +1,72 @@
-Using `BaseGeometry`
-----------------------
+=============================
+The ``7-base_geometry`` module
+=============================
 
-Import class from module:
+Using ``BaseGeometry``
+---------------------
+
+Import the class:
+
     >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
-Basic valid test cases
-----------------------
-Test the `area` method (should raise an exception):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.area()
+Now test it:
+
+    >>> bg = BaseGeometry()
+    
+    >>> bg.integer_validator("my_int", 12)
+
+    >>> bg.integer_validator("width", 89)
+
+    >>> bg.area()
     Traceback (most recent call last):
     Exception: area() is not implemented
 
-Test the `integer_validator` method with a valid positive integer:
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("width", 5)
-
-Test the `integer_validator` method with a valid positive integer (name with different string):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("height", 10)
-
-Test the `integer_validator` method with a valid positive integer (large value):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("length", 1000000)
-
-Test the `integer_validator` method with a valid positive integer (boundary case):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("side", 1)
-
-Invalid inputs (TypeError expected)
------------------------------------
-Test the `integer_validator` method with a non-integer value (string):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("width", "5")
+    >>> bg.integer_validator("name", "John")
     Traceback (most recent call last):
-    TypeError: width must be an integer
+    TypeError: name must be an integer
 
-Test the `integer_validator` method with a non-integer value (float):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("height", 5.5)
+    >>> bg.integer_validator("age", 0)
     Traceback (most recent call last):
-    TypeError: height must be an integer
+    ValueError: age must be greater than 0
+    
+    >>> bg.integer_validator("distance", -4)
+    Traceback (most recent call last):
+    ValueError: distance must be greater than 0
 
-Test the `integer_validator` method with a non-integer value (list):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("length", [5])
+    >>> bg.integer_validator("average", 7.8)
     Traceback (most recent call last):
-    TypeError: length must be an integer
+    TypeError: average must be an integer
 
-Test the `integer_validator` method with a non-integer value (tuple):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("side", (5,))
+    >>> bg.integer_validator("average")
     Traceback (most recent call last):
-    TypeError: side must be an integer
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
 
-Test the `integer_validator` method with a non-integer value (dictionary):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("radius", {"size": 5})
+    >>> bg.integer_validator()
     Traceback (most recent call last):
-    TypeError: radius must be an integer
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
 
-Test the `integer_validator` method with a non-integer value (boolean):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("width", True)
+    >>> bg.integer_validator("NaN", float('nan'))
     Traceback (most recent call last):
-    TypeError: width must be an integer
+    TypeError: NaN must be an integer
 
-Test the `integer_validator` method with a non-integer value (None):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("height", None)
-    Traceback (most recent call last):
-    TypeError: height must be an integer
+    >>> bg.integer_validator("Big", 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000)
 
-Invalid inputs (ValueError expected)
-------------------------------------
-Test the `integer_validator` method with a non-positive integer (zero):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("side", 0)
+    >>> bg.integer_validator("age", (4,))
     Traceback (most recent call last):
-    ValueError: side must be greater than 0
+    TypeError: age must be an integer
 
-Test the `integer_validator` method with a negative integer:
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("length", -5)
+    >>> bg.integer_validator("age", [3])
     Traceback (most recent call last):
-    ValueError: length must be greater than 0
+    TypeError: age must be an integer
 
-Test the `integer_validator` method with a negative integer (boundary case):
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("width", -1)
+    >>> bg.integer_validator("age", True)
     Traceback (most recent call last):
-    ValueError: width must be greater than 0
+    TypeError: age must be an integer
 
-Test the `integer_validator` method with a large negative integer:
-    >>> base_geometry = BaseGeometry()
-    >>> base_geometry.integer_validator("height", -1000000)
+    >>> bg.integer_validator("age", {3, 4})
     Traceback (most recent call last):
-    ValueError: height must be greater than 0
+    TypeError: age must be an integer
+
+    >>> bg.integer_validator("age", None)
+    Traceback (most recent call last):
+    TypeError: age must be an integer
