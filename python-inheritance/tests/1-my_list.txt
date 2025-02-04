@@ -48,7 +48,7 @@ Test printing a sorted list with mixed positive and negative numbers:
     >>> my_list = MyList([3, -1, 0, -3, 2, -2, 1])
     >>> my_list.print_sorted()
     [-3, -2, -1, 0, 1, 2, 3]
-    
+
 Test printing a sorted list with positive integers:
     >>> my_list = MyList([6, 8, 1, 3])
     >>> my_list.print_sorted()
@@ -134,4 +134,70 @@ Test printing a sorted list with integers in random order:
     >>> my_list.print_sorted()
     [-100, -50, 0, 1, 10, 50]
 
+
+Test printing a sorted list with a single large integer:
+    >>> my_list = MyList([999999999])
+    >>> my_list.print_sorted()
+    [999999999]
+
+Test printing a sorted list with multiple identical large integers:
+    >>> my_list = MyList([999999999, 999999999, 999999999])
+    >>> my_list.print_sorted()
+    [999999999, 999999999, 999999999]
+
+
+Test printing a sorted list with a mix of very large positive and negative integers:
+    >>> my_list = MyList([1000000000, -500000000, 2000000000, -1000000000])
+    >>> my_list.print_sorted()
+    [-1000000000, -500000000, 1000000000, 2000000000]
+
+Test printing a sorted list with a large range of integers:
+    >>> my_list = MyList([100, 250, 350, 500, 1000, 25, 5000, 10, 150])
+    >>> my_list.print_sorted()
+    [10, 25, 100, 150, 250, 350, 500, 1000, 5000]
+
+Test printing a sorted list with integers in descending order:
+    >>> my_list = MyList([100, 90, 80, 70, 60, 50])
+    >>> my_list.print_sorted()
+    [50, 60, 70, 80, 90, 100]
+
+Test printing a sorted list with a mix of positive and negative integers with a large difference in magnitude:
+    >>> my_list = MyList([5000, -200, 150000, -1000000, 300])
+    >>> my_list.print_sorted()
+    [-1000000, -200, 300, 5000, 150000]
+
+Test printing a sorted list with only negative integers:
+    >>> my_list = MyList([-100, -200, -300])
+    >>> my_list.print_sorted()
+    [-300, -200, -100]
+
+Test printing a sorted list with both large and small integers:
+    >>> my_list = MyList([1, 5000, 99999, -150, -300000, 0])
+    >>> my_list.print_sorted()
+    [-300000, -150, 0, 1, 5000, 99999]
+
+Test printing a sorted list with alternating negative and positive integers:
+    >>> my_list = MyList([-1, 2, -3, 4, -5, 6])
+    >>> my_list.print_sorted()
+    [-5, -3, -1, 2, 4, 6]
+
+Test printing a sorted list with single-digit integers:
+    >>> my_list = MyList([8, 7, 5, 4, 3, 1, 2, 6])
+    >>> my_list.print_sorted()
+    [1, 2, 3, 4, 5, 6, 7, 8]
+
+Test printing a sorted list with integers containing both positive, negative, and zero:
+    >>> my_list = MyList([0, -10, 20, -5, 100, 1])
+    >>> my_list.print_sorted()
+    [-10, -5, 0, 1, 20, 100]
+
+Test printing a sorted list with a sequence of large integers:
+    >>> my_list = MyList([1000000000, 999999999, 1000000001])
+    >>> my_list.print_sorted()
+    [999999999, 1000000000, 1000000001]
+
+Test printing a sorted list with integers having similar values:
+    >>> my_list = MyList([200, 205, 210, 202, 203])
+    >>> my_list.print_sorted()
+    [200, 202, 203, 205, 210]
 
