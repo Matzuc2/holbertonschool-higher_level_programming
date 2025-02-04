@@ -12,5 +12,13 @@ Methods:
 
 
 class MyList(list):
+    """
+    This module defines a class MyList that inherits from the built-in list class.
+    A subclass of list that provides a method to print the list in sorted order.
+    """
+
     def print_sorted(self):
+        """
+        Prints the elements of the list in ascending sorted order.
+        """
         print(sorted(self))
