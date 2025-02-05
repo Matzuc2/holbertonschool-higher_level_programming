@@ -8,25 +8,7 @@ represent a rectangle with validation for its dimensions.
 """
 
 
-class BaseGeometry:
-    """
-    A base class for geometric operations.
-    """
-
-    def area(self):
-        """
-        Placeholder method for calculating the area.
-        """
-        raise Exception("area() is not implemented")
-
-    def integer_validator(self, name, value):
-        """
-        Validates that the provided value is an integer greater than 0.
-        """
-        if type(value) is not int:
-            raise TypeError("{} must be an integer".format(name))
-        elif value <= 0:
-            raise ValueError("{} must be greater than 0".format(name))
+BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 
 class Rectangle(BaseGeometry):
