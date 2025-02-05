@@ -2,11 +2,7 @@
 """
 Module: base_geometry
 This module defines the `BaseGeometry` class and the `Rectangle` class
-that inherits from `BaseGeometry`. The `BaseGeometry` class includes
-methods for geometric operations, and `Rectangle` extends this to
-represent a rectangle with validation for its dimensions.
 """
-
 
 BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
