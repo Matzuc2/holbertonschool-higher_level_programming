@@ -1,102 +1,67 @@
 #!/usr/bin/python3
 """
-This module defines the `Square` class.
+This module defines an abstract Animal class and its subclasses Dog and Cat.
 
-The class provides functionality to create a square object with a specified
-size and position, calculate its area, and print a visual representation.
+The Animal class provides a blueprint for defining animals with a sound method
+that must be implemented by subclasses.
 """
 
+from abc import ABC, abstractmethod
 
-class Square:
+
+class Animal(ABC):
     """
-    Represents a square with a specific size and position.
+    Abstract base class representing an animal.
 
-    Attributes:
-        __size (int): The size of the square (length of one side).
-        __position (tuple): The position of the square, defined as a tuple
-        of two non-negative integers (x, y) for horizontal and vertical offset.
+    Methods:
+        sound(): Abstract method that must be implemented by subclasses to
+        define the sound the animal makes.
     """
 
-    def __init__(self, size=0, position=(0, 0)):
+    @abstractmethod
+    def sound(self):
         """
-        Initializes a square with a given size and position.
+        Abstract method to define the sound an animal makes.
 
-        Args:
-            size (int): The size of the square's side (default is 0).
-            position (tuple): A tuple of two non-negative integers representing
-            the position (default is (0, 0)).
-
-        Raises:
-            TypeError: If size is not an integer or position is not a tuple
-            of two non-negative integers.
-            ValueError: If size is negative.
-        """
-        self.size = size  # Use setter to validate
-        self.position = position  # Use setter to validate
-
-    def area(self):
-        """
-        Computes and returns the area of the square.
+        This method must be implemented by subclasses.
 
         Returns:
-            int: The area of the square.
+            str: A string representing the animal's sound.
         """
-        return self.__size * self.__size
+        pass
 
-    @property
-    def position(self):
+
+class Dog(Animal):
+    """
+    Represents a Dog, a subclass of Animal.
+
+    Methods:
+        sound(): Returns the sound a dog makes.
+    """
+
+    def sound(self):
         """
-        Gets the position of the square.
+        Returns the sound a dog makes.
 
         Returns:
-            tuple: The position of the square as a tuple of two non-negative
-            integers.
+            str: The string "Bark".
         """
-        return self.__position
+        return "Bark"
 
-    @position.setter
-    def position(self, value):
+
+class Cat(Animal):
+    """
+    Represents a Cat, a subclass of Animal.
+
+    Methods:
+        sound(): Returns the sound a cat makes.
+    """
+
+    def sound(self):
         """
-        Sets the position of the square.
-
-        Args:
-            value (tuple): A tuple of two non-negative integers.
-
-        Raises:
-            TypeError: If value is not a tuple of two non-negative integers.
-        """
-        if (
-            not isinstance(value, tuple) or
-            len(value) != 2 or
-            not all(isinstance(num, int) and num >= 0 for num in value)
-        ):
-            raise TypeError("position must be a tuple of 2 positive integers")
-        self.__position = value
-
-    @property
-    def size(self):
-        """
-        Gets the size of the square.
+        Returns the sound a cat makes.
 
         Returns:
-            int: The size of the square.
+            str: The string "Meow".
         """
-        return self.__size
-
-    @size.setter
-    def size(self, value):
-        """
-        Sets the size of the square.
-
-        Args:
-            value (int): The new size of the square.
-
-        Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is negative.
-        """
-        if not isinstance(value, int):
-            raise TypeError("size must be an integer")
-        if value < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = value
+        return "Meow"
