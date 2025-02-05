@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module: geometry This module defines the `BaseGeometry` class """
 
+
 Rectangle = __import__('9-rectangle.py').Rectangle
 
 
@@ -14,8 +15,8 @@ class Square(Rectangle):
         Initializes the square with the given size, validating it.
         """
         self.integer_validator("size", size)
-        super().__init__(size, size)  # Call Rectangle's constructor
-        self.__size = size  # Store size separately if needed
+        super().__init__(size, size)
+        self.__size = size 
 
     def __str__(self):
         """
