@@ -25,7 +25,7 @@ class BaseGeometry:
         """
         if type(name) is not str:
             raise TypeError("name of parameter must be a string")
-        elif type(value) is not int:
+        elif type(value) is not int or not isinstance(value, int):
             raise TypeError("{} must be an integer".format(name))
         elif value <= 0:
             raise ValueError("{} must be greater than 0".format(name))

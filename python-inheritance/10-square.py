@@ -10,22 +10,11 @@ inherits from `Rectangle`.
 class BaseGeometry:
     """
     A base class for geometric operations.
-
-    This class provides a method to validate integer values, ensuring
-    they are positive integers greater than 0.
     """
 
     def integer_validator(self, name, value):
         """
         Validates that the provided value is an integer greater than 0.
-
-        Args:
-            name (str): The name of the parameter.
-            value (int): The value to validate.
-
-        Raises:
-            TypeError: If value is not an integer.
-            ValueError: If value is not greater than 0.
         """
         if type(name) is not str:
             raise TypeError("name of parameter must be a string")
@@ -38,22 +27,6 @@ class BaseGeometry:
 class Rectangle(BaseGeometry):
     """
     A class used to represent a Rectangle, inheriting from `BaseGeometry`.
-
-    Attributes:
-    -----------
-    __width : int
-        The width of the rectangle.
-    __height : int
-        The height of the rectangle.
-
-    Methods:
-    --------
-    __init__(self, width, height)
-        Initializes the rectangle with width and height, validating them.
-    __str__(self)
-        Returns a string representation of the rectangle.
-    area(self)
-        Computes and returns the area of the rectangle.
     """
 
     def __init__(self, width, height):
@@ -92,15 +65,6 @@ class Square(Rectangle):
     """
     A class used to represent a Square, inheriting from `Rectangle`.
 
-    Methods:
-    --------
-    __init__(self, size)
-        Initializes a Square instance with a given size.
-    area(self)
-        Returns the area of the square.
-    __str__(self)
-        Returns a string representation of the square in the format
-        "[Rectangle] size/size".
     """
 
     def __init__(self, size):
