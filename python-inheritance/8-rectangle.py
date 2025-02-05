@@ -40,7 +40,7 @@ class BaseGeometry:
             TypeError: If value is not an integer.
             ValueError: If value is not greater than 0.
         """
-        if type(value) is not int:
+        if type(value) is not int and not isinstance(int, value):
             raise TypeError("{} must be an integer".format(name))
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
@@ -48,24 +48,32 @@ class BaseGeometry:
 
 class Rectangle(BaseGeometry):
     """
-    A class that represents a rectangle.
+    A class used to represent a Rectangle, inheriting from `BaseGeometry`.
 
-    This class inherits from `BaseGeometry` and represents a rectangle
-    by validating its dimensions (width and height) using the
-    `integer_validator` method.
+    Attributes:
+    -----------
+    __width : int
+        The width of the rectangle.
+    __height : int
+        The height of the rectangle.
+
+    Methods:
+    --------
+    __init__(self, width, height)
+        Initializes the rectangle with width and height, validating them.
+    __str__(self)
+        Returns a string representation of the rectangle.
+    area(self)
+        Computes and returns the area of the rectangle.
     """
 
     def __init__(self, width, height):
         """
-        Initializes a `Rectangle` instance.
+        Initializes the rectangle with width and height, validating them.
 
         Args:
             width (int): The width of the rectangle.
             height (int): The height of the rectangle.
-
-        Raises:
-            TypeError: If `width` or `height` are not integers.
-            ValueError: If `width` or `height` are less than or equal to 0.
         """
         self.integer_validator("width", width)
         self.integer_validator("height", height)
