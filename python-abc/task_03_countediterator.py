@@ -42,8 +42,12 @@ class CountedIterator:
         Raises:
             StopIteration: If the iterator is exhausted.
         """
-        self.__count += 1
-        return next(self.__data)
+        next1 = next(self.__data)
+        if next1 is None:
+            raise StopIteration("No more items")
+        else:
+            self.__count += 1
+            return next1
 
     def get_count(self):
         """
