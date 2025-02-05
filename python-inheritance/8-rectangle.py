@@ -26,7 +26,7 @@ class BaseGeometry:
             NotImplementedError: This exception is raised to indicate
             that the method should be implemented by subclasses.
         """
-        pass
+        raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
         """
