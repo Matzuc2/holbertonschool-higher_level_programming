@@ -29,12 +29,10 @@ class BaseGeometry:
         """
         if type(name) is not str:
             raise TypeError("name of parameter must be a string")
-        if type(value) is not int:
+        elif type(value) is not int:
             raise TypeError("{} must be an integer".format(name))
-        if value <= 0:
+        elif value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
-        else:
-            return value
 
 
 class Rectangle(BaseGeometry):
