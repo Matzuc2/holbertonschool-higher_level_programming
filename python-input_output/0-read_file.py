@@ -12,11 +12,6 @@ def read_file(filename=""):
     Args:
         filename (str): The name of the file to read.
          Defaults to an empty string.
-
-    Raises:
-        FileNotFoundError: If the file does not exist.
-        IOError: If an error occurs while reading the file.
     """
     with open(filename, encoding="utf-8") as f:
-        content = f.read()
-    print(content, end="")
+        print(f.read(), end="")
