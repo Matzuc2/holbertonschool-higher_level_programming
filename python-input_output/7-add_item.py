@@ -21,20 +21,17 @@ Modules:
 import os
 from sys import argv
 
-# Import functions from previous tasks
 save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
 load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
 file_path = "add_item.json"
-
-# Load existing list or create a new one
-if os.path.exists(file_path):
-    my_list = load_from_json_file(file_path)
+if os.path.exists(file_path) is False:
+    way = argv[1:]
+    save_to_json_file(way, file_path)
 else:
-    my_list = []
-
-# Extend list with new command-line arguments
-my_list.extend(argv[1:])
-
-# Save updated list back to the JSON file
-save_to_json_file(my_list, file_path)
+    way = load_from_json_file(file_path)
+    argv0 = argv[1:]
+    way.extend(argv0)
+    with open(file_path, "w") as file:
+        file.write("")
+    save_to_json_file(way, file_path)
