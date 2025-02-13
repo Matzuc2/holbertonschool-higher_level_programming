@@ -18,14 +18,23 @@ Modules:
     - save_to_json_file: Saves a list to JSON.
 """
 
-import sys
 import os
-load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+from sys import argv
+
+# Import functions from previous tasks
 save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
+
 file_path = "add_item.json"
+
+# Load existing list or create a new one
 if os.path.exists(file_path):
     my_list = load_from_json_file(file_path)
 else:
     my_list = []
-my_list.extend(sys.argv[1:])
+
+# Extend list with new command-line arguments
+my_list.extend(argv[1:])
+
+# Save updated list back to the JSON file
 save_to_json_file(my_list, file_path)
