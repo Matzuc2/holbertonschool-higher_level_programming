@@ -6,6 +6,7 @@ Python objects using the pickle module.
 
 import json
 
+
 def serialize_and_save_to_file(data, filename):
     """
     Serializes an object and saves it to a file.
