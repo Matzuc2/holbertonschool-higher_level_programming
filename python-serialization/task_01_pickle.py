@@ -76,5 +76,5 @@ class CustomObject:
             with open(filename, "rb") as file:
                 loaded_data = pickle.load(file)
             return loaded_data
-        except (FileNotFoundError, pickle.UnpicklingError) as e:
+        except Exception as e:
             return None
