@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import pickle
-
+import os
 """
 This module defines a class `CustomObject` that represents an object
 with attributes such as `name`, `age`, and `is_student`. It includes
@@ -53,6 +53,8 @@ class CustomObject:
             filename (str): The name of the file where the
             serialized object will be saved.
         """
+        if os.path.exists(filename) is False:
+            return None
         with open(filename, "wb") as file:
             pickle.dump(self, file)
 
@@ -68,6 +70,8 @@ class CustomObject:
         Returns:
             CustomObject: A CustomObject instance loaded from the file.
         """
+        if os.path.exists(filename) is False:
+            return None
         with open(filename, "rb") as file:
             loaded_data = pickle.load(file)
         return loaded_data
