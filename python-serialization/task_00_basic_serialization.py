@@ -33,5 +33,4 @@ def load_and_deserialize(filename):
         any: The deserialized Python object.
     """
     with open(filename, "rb") as file:
-        loaded_data = pickle.load(file)
-    return loaded_data
+        return pickle.load(file)
