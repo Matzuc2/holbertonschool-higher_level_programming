@@ -5,6 +5,8 @@ Python objects using the pickle module.
 """
 
 import pickle
+import os
+import json
 
 
 def serialize_and_save_to_file(data, filename):
@@ -18,8 +20,12 @@ def serialize_and_save_to_file(data, filename):
     Returns:
         None
     """
-    with open(filename, "wb") as file:
-        pickle.dump(data, file)
+    if os.path.exists(filename) is False:
+        with open(filename, "ab") as file:
+            pickle.dump(data, file)
+    else:
+        with open(filename, "wb") as file:
+            pickle.dump(data, file)
 
 
 def load_and_deserialize(filename):
