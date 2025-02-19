@@ -34,9 +34,10 @@ def fetch_and_print_posts():
     """
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
     print("Status code:", r.status_code)
-    response = r.json()
-    for i in response:
-        print(i["title"])
+    if r.status_code == 200:
+        response = r.json()
+        for i in response:
+            print(i["title"])
 
 
 def fetch_and_save_posts():
@@ -52,7 +53,6 @@ def fetch_and_save_posts():
         None
     """
     list1 = []
-    dict1 = {}
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
     if r.status_code == 200:
         response = r.json()
