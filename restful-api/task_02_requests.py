@@ -60,6 +60,7 @@ def fetch_and_save_posts():
         }
         list1.append(dict1)
     with open('posts.csv', 'w', newline='') as csvfile:
-        csv_writer = csv.DictWriter(csvfile, fieldnames=['id', 'title', 'body'])
+        csv_writer =\
+            csv.DictWriter(csvfile, fieldnames=['id', 'title', 'body'])
         csv_writer.writeheader()
         csv_writer.writerows(list1)
