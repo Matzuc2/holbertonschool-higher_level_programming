@@ -56,33 +56,34 @@ class MyServer(BaseHTTPRequestHandler):
         """
         if self.path == "/":
             self.send_response(200)
-            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.send_header("Content-Type", "text/plain")
             self.end_headers()
             self.wfile.write(b"Hello, this is a simple API!")
 
         elif self.path == "/data":
             self.send_response(200)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps(dict1).encode("utf-8"))
 
         elif self.path == "/info":
             self.send_response(200)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps(info1).encode("utf-8"))
 
         elif self.path == "/status":
             self.send_response(200)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(b"OK")
+            self.wfile.write(json.dumps({"status": "OK"}).encode("utf-8"))
 
         else:
             self.send_response(404)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type", "application/json")
             self.end_headers()
             error_message = {"error": "Endpoint not found"}
+            self.log_message("404 Not Found: %s", self.path)
             self.wfile.write(json.dumps(error_message).encode("utf-8"))
 
 
