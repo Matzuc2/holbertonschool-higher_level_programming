@@ -30,7 +30,7 @@ def fetch_and_print_posts():
         None
     """
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
-    print("Status code :", r.status_code)
+    print("Status code:", r.status_code)
     response = r.json()
     for i in response:
         print(i["title"])
