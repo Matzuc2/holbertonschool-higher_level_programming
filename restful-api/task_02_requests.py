@@ -61,6 +61,7 @@ def fetch_and_save_posts():
             for k in list(dict1.keys()):
                 if k != 'id' and k != 'body' and k != 'title':
                     del dict1[k]
+            dict1['body'] = dict1['body'].replace('\n', ' ')
             list1.append(dict1)
         with open('posts.csv', 'w', newline='', encoding='utf-8') as csvfile:
             csv_writer =\
