@@ -37,6 +37,41 @@ def fetch_and_print_posts():
 
 
 def fetch_and_save_posts():
+    """
+    Fetches posts from the JSONPlaceholder API and
+    saves selected fields to a CSV file.
+
+    The function makes a GET request to retrieve all posts.
+    It filters each post to keep only 'id', 'title', and 'body'.
+    The filtered data is then written to 'posts.csv' using the csv module.
+
+    Returns:
+        None
+    """
+    list1 = []
+    dict1 = {}
+    r = requests.get('https://jsonplaceholder.typicode.com/posts')
+    response = r.json()
+    for i in response:
+        dict1 = i.copy()
+        for k in list(dict1.keys()):
+            if k != 'id' and k != 'body' and k != 'title':
+                del dict1[k]
+        list1.append(dict1)
+    with open('posts.csv', 'w', newline='') as csvfile:
+        csv_writer =\
+            csv.DictWriter(csvfile, fieldnames=['id', 'title', 'body'])
+        csv_writer.writeheader()
+        csv_writer.writerows(list1)
+
+
+"""
+Alternative Implementation:
+
+This version constructs a filtered dictionary directly
+instead of modifying a copy.
+
+def fetch_and_save_posts():
     '''
     Fetches posts from the JSONPlaceholder API and saves
       selected fields to a CSV file.
@@ -58,9 +93,10 @@ def fetch_and_save_posts():
             'title': i['title'],
             'body': i['body']
         }
-        list1.append(dict1)
+        list1.append(dict1))
     with open('posts.csv', 'w', newline='') as csvfile:
         csv_writer =\
             csv.DictWriter(csvfile, fieldnames=['id', 'title', 'body'])
         csv_writer.writeheader()
         csv_writer.writerows(list1)
+"""
