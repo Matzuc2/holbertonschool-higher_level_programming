@@ -8,15 +8,18 @@ print them, and save them to a CSV file.
 
 Functions:
     - fetch_and_print_posts(): Fetches posts from an API
-    and prints their titles.
+      and prints their titles.
     - fetch_and_save_posts(): Fetches posts from an API and saves
       selected fields to a CSV file.
 """
 
+"""
+Sample request for testing purposes:
 
-"""r = requests.get('https://jsonplaceholder.typicode.com/posts')
+r = requests.get('https://jsonplaceholder.typicode.com/posts')
 response = r.json()
-print(response)"""
+print(response)
+"""
 
 
 def fetch_and_print_posts():
@@ -39,7 +42,7 @@ def fetch_and_print_posts():
 def fetch_and_save_posts():
     """
     Fetches posts from the JSONPlaceholder API and
-    saves selected fields to a CSV file.
+      saves selected fields to a CSV file.
 
     The function makes a GET request to retrieve all posts.
     It filters each post to keep only 'id', 'title', and 'body'.
@@ -75,10 +78,10 @@ instead of modifying a copy.
 def fetch_and_save_posts():
     '''
     Fetches posts from the JSONPlaceholder API and saves
-      selected fields to a CSV file.
+    selected fields to a CSV file.
 
     This implementation directly extracts only 'id',
-      'title', and 'body' fields.
+    'title', and 'body' fields.
     The filtered data is written to 'posts.csv' using the csv module.
 
     Returns:
