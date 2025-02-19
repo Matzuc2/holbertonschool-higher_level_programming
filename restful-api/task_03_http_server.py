@@ -22,7 +22,7 @@ serverPort = 8000
 
 dict1 = {
     "name": "John",
-    "age": 30,  # Changed from string to integer
+    "age": 30,
     "city": "New York"
 }
 
