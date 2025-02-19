@@ -16,14 +16,12 @@ Endpoints:
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 
-# Server configuration
 hostName = "localhost"
 serverPort = 8000
 
-# Sample data for responses
 dict1 = {
-    "Name": "John",
-    "age": "30",
+    "name": "John",
+    "age": 30,
     "city": "New-York"
 }
 
@@ -71,7 +69,11 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(json.dumps(info1), "utf-8"))
-
+        elif self.path == "/status":
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(b"OK")
         else:
             self.send_response(404)
             self.send_header("Content-Type", "text/plain")
