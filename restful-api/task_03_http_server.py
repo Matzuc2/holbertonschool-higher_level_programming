@@ -80,10 +80,10 @@ class MyServer(BaseHTTPRequestHandler):
 
         else:
             self.send_response(404)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.end_headers()
-            error_message = {"error": "Endpoint not found"}
-            self.wfile.write(json.dumps(error_message).encode("utf-8"))
+            error_message = "Endpoint not found"
+            self.wfile.write(error_message.encode("utf-8"))
 
 
 if __name__ == "__main__":
@@ -93,12 +93,4 @@ if __name__ == "__main__":
     The server runs indefinitely until interrupted with a keyboard signal.
     """
     webServer = HTTPServer((hostName, serverPort), MyServer)
-    print(f"Server started at http://{hostName}:{serverPort}")
-
-    try:
-        webServer.serve_forever()
-    except KeyboardInterrupt:
-        pass
-
-    webServer.server_close()
-    print("Server stopped.")
+    webServer.serve_forever()
