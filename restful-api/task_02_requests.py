@@ -33,7 +33,7 @@ def fetch_and_print_posts():
         None
     """
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
-    print("Status code:", r.status_code)
+    print("Status Code:", r.status_code)
     if r.status_code == 200:
         response = r.json()
         for i in response:
