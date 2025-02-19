@@ -1,24 +1,25 @@
 #!/usr/bin/python3
 """
-A simple HTTP server that handles GET requests and serves JSON/text responses.
+A simple HTTP server that serves JSON and plain text responses.
 
-This script creates an HTTP server using Python's built-in http.server module.
-It defines a few predefined endpoints that return either JSON or plain text
-responses.
+This script creates an HTTP server using Python's built-in http.server
+module. It defines several endpoints that return either JSON or plain
+text responses.
 
 Endpoints:
-    - "/"       : Returns a simple welcome message.
-    - "/data"   : Returns a JSON object with sample user details.
-    - "/info"   : Returns JSON containing API version information.
-    - "/status" : Returns a simple "OK" message.
-    - Other     : Returns a 404 error for unknown endpoints.
+    - "/": Returns a welcome message.
+    - "/data": Returns a JSON object with user details.
+    - "/info": Returns version information about the API.
+    - "/status": Returns a status message indicating the server is operational.
+    - Other: Returns a 404 error for unknown endpoints.
 """
 
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 import json
+import socketserver
 
-hostName = "localhost"
-serverPort = 8000
+PORT = 8000
+
 
 dict1 = {
     "name": "John",
@@ -34,22 +35,22 @@ info1 = {
 
 class MyServer(BaseHTTPRequestHandler):
     """
-    A custom HTTP request handler to process GET requests.
+    Custom HTTP request handler that processes GET requests.
 
-    This class defines behavior for various API endpoints and sends
-    appropriate responses based on the request path.
+    This class defines the behavior of the server for different endpoints
+    and generates appropriate responses based on the request path.
     """
 
     def do_GET(self):
         """
-        Handles GET requests and returns appropriate responses.
+        Handles GET requests for various endpoints.
 
-        Endpoints:
-            - "/data": Returns JSON containing sample user details.
-            - "/": Returns a simple plain text welcome message.
-            - "/info": Returns JSON with API version details.
-            - "/status": Returns a simple "OK" message.
-            - Other: Returns a 404 error for unknown endpoints.
+        Depending on the requested path, the server responds with:
+            - 200 OK and a welcome message for "/".
+            - 200 OK and user data for "/data".
+            - 200 OK and version info for "/info".
+            - 200 OK and a status message for "/status".
+            - 404 Not Found for any other endpoint.
 
         Returns:
             None
@@ -83,23 +84,11 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "application/json")
             self.end_headers()
             error_message = {"error": "Endpoint not found"}
-            self.log_message("404 Not Found: %s", self.path)
             self.wfile.write(json.dumps(error_message).encode("utf-8"))
 
 
-if __name__ == "__main__":
-    """
-    Starts the HTTP server and listens for incoming requests.
+Handler = MyServer
 
-    The server runs indefinitely until interrupted with a keyboard signal.
-    """
-    webServer = HTTPServer((hostName, serverPort), MyServer)
-    print(f"Server started at http://{hostName}:{serverPort}")
-
-    try:
-        webServer.serve_forever()
-    except KeyboardInterrupt:
-        pass
-
-    webServer.server_close()
-    print("Server stopped.")
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print(f"Serving at port {PORT}")
+    httpd.serve_forever()
