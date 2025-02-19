@@ -18,20 +18,6 @@ from http.server import BaseHTTPRequestHandler
 import json
 import socketserver
 
-PORT = 8000
-
-
-dict1 = {
-    "name": "John",
-    "age": 30,
-    "city": "New York"
-}
-
-info1 = {
-    "version": "1.0",
-    "description": "A simple API built with http.server"
-}
-
 
 class MyServer(BaseHTTPRequestHandler):
     """
@@ -55,40 +41,37 @@ class MyServer(BaseHTTPRequestHandler):
         Returns:
             None
         """
-        if self.path == "/":
+        if self.path == '/':
             self.send_response(200)
             self.send_header("Content-Type", "text/plain")
             self.end_headers()
             self.wfile.write(b"Hello, this is a simple API!")
-
-        elif self.path == "/data":
+        elif self.path == '/data':
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
+            dict1 = {
+                        "name": "John",
+                        "age": 30,
+                        "city": "New York"
+                    }
             self.end_headers()
             self.wfile.write(json.dumps(dict1).encode("utf-8"))
-
-        elif self.path == "/info":
+        elif self.path == '/status':
             self.send_response(200)
-            self.send_header("Content-Type", "application/json")
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(json.dumps(info1).encode("utf-8"))
-
-        elif self.path == "/status":
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            self.wfile.write(json.dumps({"status": "OK"}).encode("utf-8"))
-
+            self.wfile.write(b"OK")
         else:
             self.send_response(404)
-            self.send_header("Content-Type", "application/json")
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            error_message = {"error": "Endpoint not found"}
-            self.wfile.write(json.dumps(error_message).encode("utf-8"))
+            self.wfile.write(b"Endpoint not found")
 
+
+PORT = 8000
 
 Handler = MyServer
-
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Serving at port {PORT}")
-    httpd.serve_forever()
+if __name__ == "__main__":
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print(f"Serving at port {PORT}")
+        httpd.serve_forever()
