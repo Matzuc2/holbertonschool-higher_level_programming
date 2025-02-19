@@ -51,18 +51,19 @@ def fetch_and_save_posts():
     list1 = []
     dict1 = {}
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
-    response = r.json()
-    for i in response:
-        dict1 = i.copy()
-        for k in list(dict1.keys()):
-            if k != 'id' and k != 'body' and k != 'title':
-                del dict1[k]
-        list1.append(dict1)
-    with open('posts.csv', 'w', newline='') as csvfile:
-        csv_writer =\
-            csv.DictWriter(csvfile, fieldnames=['id', 'title', 'body'])
-        csv_writer.writeheader()
-        csv_writer.writerows(list1)
+    if r.status_code == 200:
+        response = r.json()
+        for i in response:
+            dict1 = i.copy()
+            for k in list(dict1.keys()):
+                if k != 'id' and k != 'body' and k != 'title':
+                    del dict1[k]
+            list1.append(dict1)
+        with open('posts.csv', 'w', newline='') as csvfile:
+            csv_writer =\
+                csv.DictWriter(csvfile, fieldnames=['id', 'title', 'body'])
+            csv_writer.writeheader()
+            csv_writer.writerows(list1)
 
 
 """
