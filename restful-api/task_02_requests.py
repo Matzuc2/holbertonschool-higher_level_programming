@@ -59,7 +59,7 @@ def fetch_and_save_posts():
                 if k != 'id' and k != 'body' and k != 'title':
                     del dict1[k]
             list1.append(dict1)
-        with open('posts.csv', 'w', newline='') as csvfile:
+        with open('posts.csv', 'w', newline='', encoding='utf-8') as csvfile:
             csv_writer =\
                 csv.DictWriter(csvfile, fieldnames=['id', 'title', 'body'])
             csv_writer.writeheader()
