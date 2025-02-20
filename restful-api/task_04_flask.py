@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Flask API that provides user data management.
 """
@@ -57,11 +57,17 @@ def add_user():
 
     username = data.get("username")
 
-    if not username or username not in data:
+    if "username" not in data:
         return jsonify({"error": "Username is required"}), 400
 
 
-    users[username] = data
+    user_data = {
+        "username": data["username"],
+        "name": data["name"],
+        "age": data["age"],
+        "city": data["city"]
+    }
+    users[username] = user_data
 
     return jsonify({"message": "User added", "user": data}), 201
 
