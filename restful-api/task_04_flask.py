@@ -17,12 +17,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-users = {
-    "jane": {"username": "jane", "name": "Jane",
-             "age": 28, "city": "Los Angeles"},
-    "john": {"username": "john", "name": "John",
-             "age": 30, "city": "New York"},
-}
+users = {}
 
 
 @app.route("/", strict_slashes=False)
@@ -55,7 +50,7 @@ def status():
     Returns:
         tuple: Status message and HTTP status code 200.
     """
-    return "OK", 200
+    return "OK"
 
 
 @app.route("/users/<username>", methods=["GET"], strict_slashes=False)
@@ -70,7 +65,8 @@ def user_details(username):
         tuple: JSON user details with status 200 if found,
         or error message with status 404.
     """
-    if username in users:
+    user = users.get("username")
+    if user in users:
         return jsonify(users[username]), 200
     return jsonify({"error": "User not found"}), 404
 
@@ -105,7 +101,6 @@ def add_user():
         return jsonify({"message": "User added", "user": data}), 201
     else:
         return jsonify({"error": "Request must be JSON"}), 400
-
 
 
 if __name__ == "__main__":
