@@ -20,7 +20,7 @@ app = Flask(__name__)
 users = {}
 
 
-@app.route("/", strict_slashes=False)
+@app.route("/")
 def home():
     """
     Welcome message for the API root.
@@ -31,7 +31,7 @@ def home():
     return "Welcome to the Flask API!"
 
 
-@app.route("/data", methods=["GET"], strict_slashes=False)
+@app.route("/data", methods=["GET"])
 def data():
     """
     Retrieves a list of all usernames in the system.
@@ -42,7 +42,7 @@ def data():
     return jsonify(list(users.keys())), 200
 
 
-@app.route("/status", methods=["GET"], strict_slashes=False)
+@app.route("/status", methods=["GET"])
 def status():
     """
     Returns the status of the API.
@@ -53,7 +53,7 @@ def status():
     return "OK"
 
 
-@app.route("/users/<username>", methods=["GET"], strict_slashes=False)
+@app.route("/users/<username>", methods=["GET"])
 def user_details(username):
     """
     Retrieves details of a specific user.
@@ -67,11 +67,11 @@ def user_details(username):
     """
     user = users.get("username")
     if user in users:
-        return jsonify(users[username]), 200
+        return jsonify(users[username])
     return jsonify({"error": "User not found"}), 404
 
 
-@app.route("/add_user", methods=["POST"], strict_slashes=False)
+@app.route("/add_user", methods=["POST"])
 def add_user():
     """
     Adds a new user to the system.
@@ -104,4 +104,4 @@ def add_user():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
