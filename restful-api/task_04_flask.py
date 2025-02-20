@@ -39,9 +39,10 @@ def user_details(username):
     Retrieves details of a specific user.
     """
     user = users.get(username)
-    if user in users:
+    if user:
         return jsonify(user)
-    return jsonify({"error": "User not found"}), 404
+    else:
+        return jsonify({"error": "User not found"}), 404
 
 
 @app.route("/add_user", methods=["POST"])
