@@ -25,7 +25,7 @@ users = {
 }
 
 
-@app.route("/")
+@app.route("/", strict_slashes=False)
 def home():
     """
     Welcome message for the API root.
@@ -36,7 +36,7 @@ def home():
     return "Welcome to the Flask API!"
 
 
-@app.route("/data", methods=["GET"])
+@app.route("/data", methods=["GET"], strict_slashes=False)
 def data():
     """
     Retrieves a list of all usernames in the system.
@@ -47,7 +47,7 @@ def data():
     return jsonify(list(users.keys())), 200
 
 
-@app.route("/status", methods=["GET"])
+@app.route("/status", methods=["GET"], strict_slashes=False)
 def status():
     """
     Returns the status of the API.
@@ -58,7 +58,7 @@ def status():
     return "OK", 200
 
 
-@app.route("/users/<username>", methods=["GET"])
+@app.route("/users/<username>", methods=["GET"], strict_slashes=False)
 def user_details(username):
     """
     Retrieves details of a specific user.
@@ -75,7 +75,7 @@ def user_details(username):
     return jsonify({"error": "User not found"}), 404
 
 
-@app.route("/add_user", methods=["POST"])
+@app.route("/add_user", methods=["POST"], strict_slashes=False)
 def add_user():
     """
     Adds a new user to the system.
@@ -87,10 +87,17 @@ def add_user():
                or error message with HTTP status 400 if username is missing.
     """
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Invalid JSON request"}), 400
+
     username = data.get("username")
 
     if not username:
         return jsonify({"error": "Username is required"}), 400
+
+    if username in users:
+        return jsonify({"error": "Username already exists"}), 400
 
     users[username] = data
 
