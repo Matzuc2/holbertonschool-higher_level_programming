@@ -38,7 +38,7 @@ def user_details(username):
     """
     Retrieves details of a specific user.
     """
-    user = users.get("username")
+    user = users.get(username)
     if user in users:
         return jsonify(user)
     return jsonify({"error": "User not found"}), 404
