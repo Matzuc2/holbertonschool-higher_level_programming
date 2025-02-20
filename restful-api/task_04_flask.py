@@ -50,25 +50,20 @@ def add_user():
     """
     Adds a new user to the system..
     """
-    if request.is_json:
-        data = request.get_json()
+    data = request.get_json()
 
-        if not data:
-            return jsonify({"error": "Invalid JSON"}), 400
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 400
 
-        username = data.get("username")
+    username = data.get("username")
 
-        if not username:
-            return jsonify({"error": "Username is required"}), 400
+    if not username or username not in data:
+        return jsonify({"error": "Username is required"}), 400
 
-        if username in users:
-            return jsonify({"error": "Username already exists"}), 400
 
-        users[username] = data
+    users[username] = data
 
-        return jsonify({"message": "User added", "user": data}), 201
-    else:
-        return jsonify({"error": "Request must be JSON"}), 400
+    return jsonify({"message": "User added", "user": data}), 201
 
 
 if __name__ == "__main__":
