@@ -57,9 +57,9 @@ def verify_password(username, password):
     Returns:
         str or None: The username if verification is successful, else None.
     """
-    user = users.get(username)
-    if user and check_password_hash(user["password"], password):
-        return username
+    if username in users:
+        if check_password_hash(users[username]['password'], password):
+            return username
 
 
 @app.route('/basic-protected')
@@ -89,6 +89,9 @@ def login():
     password = request.json.get("password", None)
     user = users.get(username)
 
+    if not username or not password:
+        return jsonify(), 400
+
     if not user or not check_password_hash(user["password"], password):
         return jsonify(), 401
 
@@ -101,16 +104,8 @@ def login():
 @app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
 def jwt_protected():
-    """
-    JWT protected route.
-
-    Returns:
-        JSON response indicating access is granted,
-        along with the current user's identity.
-    """
-    current_user = get_jwt_identity()
-    return jsonify({"message": "JWT Auth:\
-                     Access Granted", "user": current_user})
+    """JWT protected route"""
+    return "JWT Auth: Access Granted"
 
 
 @app.route("/admin-only", methods=["GET"])
@@ -127,7 +122,7 @@ def admin_only():
     claims = get_jwt()
     if claims.get("role") != "admin":
         return jsonify({"error": "Admin access required"}), 403
-    return "Admin Access: Granted"
+    return "Admin Access: Granted", 200
 
 
 @jwt.unauthorized_loader
