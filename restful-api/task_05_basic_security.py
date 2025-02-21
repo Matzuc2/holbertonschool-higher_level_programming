@@ -118,12 +118,12 @@ def admin_only():
 
 
 @jwt.unauthorized_loader
-def unauthorized_response(error):
-    return jsonify({"error": str(error)}), 401
+def unauthorized_response(err):
+    return jsonify({"error": "Missing or invalid token"}), 401
 
 
 @jwt.invalid_token_loader
-def invalid_token_response():
+def invalid_token_response(error):
     """
     Custom response for invalid tokens.
 
@@ -134,7 +134,7 @@ def invalid_token_response():
 
 
 @jwt.expired_token_loader
-def expired_token_response():
+def expired_token_response(error):
     """
     Custom response for expired tokens.
 
@@ -145,12 +145,12 @@ def expired_token_response():
 
 
 @jwt.revoked_token_loader
-def handle_revoked_token_error(err):
+def handle_revoked_token_error(error):
     return jsonify({"error": "Token has been revoked"}), 401
 
 
 @jwt.needs_fresh_token_loader
-def handle_needs_fresh_token_error(err):
+def handle_needs_fresh_token_error(error):
     return jsonify({"error": "Fresh token required"}), 401
 
 
