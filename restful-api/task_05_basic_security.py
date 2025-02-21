@@ -87,17 +87,16 @@ def login():
     """
     username = request.json.get("username", None)
     password = request.json.get("password", None)
-    user = users.get(username)
 
     if not username or not password:
         return jsonify(), 400
 
+    user = users.get(username)
+
     if not user or not check_password_hash(user["password"], password):
         return jsonify(), 401
 
-    access_token = create_access_token(
-        identity=username, additional_claims={"role": user["role"]}
-    )
+    access_token = create_access_token(identity=username)
     return jsonify(access_token=access_token), 200
 
 
@@ -119,7 +118,7 @@ def admin_only():
           is granted if the user has an admin role,
         or an error message if access is denied.
     """
-    claims = get_jwt()
+    claims = get_jwt_identity()
     if claims.get("role") != "admin":
         return jsonify({"error": "Admin access required"}), 403
     return "Admin Access: Granted", 200
