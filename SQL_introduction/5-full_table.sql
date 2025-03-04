@@ -1,2 +1,2 @@
--- This SQL command shows the columns of the table named 'first_table'
-SHOW COLUMNS FROM first_table;
+-- This SQL command shows the creation statement of the table named 'first_table'
+SHOW CREATE TABLE first_table;
