@@ -17,7 +17,7 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
 metadata = MetaData(engine)
 
-stmt = select(State)
+stmt = select(State).order_by(State.id)
 with engine.connect() as conn:
     for row in conn.execute(stmt):
         print("{}: {}".format(row.id, row.name))
