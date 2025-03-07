@@ -2,6 +2,7 @@
 """ Module that contains the State class """
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import MetaData
 
 Base = declarative_base()
 
