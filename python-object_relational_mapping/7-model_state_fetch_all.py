@@ -3,8 +3,7 @@
 from model_state import Base, State
 from sqlalchemy import create_engine
 import sys
-from sqlalchemy import MetaData
-from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from sqlalchemy import (create_engine)
 if __name__ == "__main__":
@@ -14,10 +13,8 @@ if __name__ == "__main__":
         ),
         pool_pre_ping=True
     )
-    Base.metadata.create_all(engine)
-metadata = MetaData(engine)
-if __name__ == "__main__":
-    stmt = select(State).order_by(State.id)
-    with engine.connect() as conn:
-        for row in conn.execute(stmt):
-            print("{}: {}".format(row.id, row.name))
+    session = Session(engine)
+
+    stmt = session.query(State).order_by(State.id)
+    for row in stmt:
+        print("{}: {}".format(row.id, row.name))
