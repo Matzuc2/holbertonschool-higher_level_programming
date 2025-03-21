@@ -9,10 +9,10 @@ def generate_invitations(template, attendees):
        or not all(isinstance(attendee, dict) for attendee in attendees):
         print("Error: Attendees must be a list of dictionaries.")
         return
-    if template is None:
+    if template == "" or None:
         print("Error: Template don't have to be empty")
         return
-    if attendees is None:
+    if attendees == "" or None:
         print("Error: Attendees don't have to be empty")
         return
 
@@ -31,7 +31,8 @@ def generate_invitations(template, attendees):
             template1 = template1.replace(
                 "{event_location}",
                 str(attendee.get("event_location", "N/A")))
-            with open("output_{}.txt".format(i), "w") as f:
-                f.write(template1)
+            if not os.path.exists("output_{}.txt".format(i)):
+                with open("output_{}.txt".format(i), "w") as f:
+                    f.write(template1)
         except KeyError as e:
             print(f"Keyerror: {e}")
