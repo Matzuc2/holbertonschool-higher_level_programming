@@ -31,10 +31,10 @@ def read_sql_file(filepath):
         rows = cursor.fetchall()
         for row in rows:
             products.append({
-                "id": row["id"],
-                "name": row["name"],
-                "category": row["category"],
-                "price": row["price"]
+                "id": row[0],
+                "name": row[1],
+                "category": row[2],
+                "price": row[3]
             })
     except sqlite3.Error as e:
         print(f"Database error: {e}")
