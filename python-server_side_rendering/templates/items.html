@@ -6,11 +6,15 @@
 <body>
     {% include 'header.html' %}
     <h1>Items List</h1>
-    <ul>
-        {% for item in items %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No items found</p>
+    {% endif %}
     {% include 'footer.html' %}
 </body>
 </html>
