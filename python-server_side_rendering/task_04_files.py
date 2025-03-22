@@ -23,10 +23,24 @@ def read_csv_file(filepath):
     return products
 
 def read_sql_file(filepath):
-    connexion = sqlite3.connect(filepath)
-    cursor = connexion.execute("SELECT * FROM PRODUCTS")
-    rows = cursor.fetchall()
-    return rows
+    products = []
+    try:
+        conn = sqlite3.connect(filepath)
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, name, category, price FROM Products")
+        rows = cursor.fetchall()
+        for row in rows:
+            products.append({
+                "id": row["id"],
+                "name": row["name"],
+                "category": row["category"],
+                "price": row["price"]
+            })
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+    finally:
+        conn.close()
+    return products
 
 
 @app.route('/products')
