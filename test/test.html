@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Démonstration XSS - Cookie</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; background-color: #f0f0f0; }
+    .container { background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    input, button { padding: 10px; margin-top: 10px; width: 100%; }
+    .output { margin-top: 20px; background: #eee; padding: 10px; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Démonstration XSS - Cookie</h2>
+    <form id="form">
+      <input type="text" id="userInput" placeholder="Tape ton pseudo ou un script ici">
+      <button type="submit">Envoyer</button>
+    </form>
+
+    <div class="output">
+      Bonjour, <span id="pseudo">...</span>
+    </div>
+  </div>
+
+  <script>
+    // Simule un cookie de session
+    document.cookie = "session_id=ABC123456; path=/";
+
+    // Quand on soumet le formulaire
+    document.getElementById("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const input = document.getElementById("userInput").value;
+      const encoded = encodeURIComponent(input);
+      window.location.search = "?user=" + encoded;
+    });
+
+    // Récupère et affiche la valeur depuis l’URL
+    const params = new URLSearchParams(window.location.search);
+    const user = params.get("user");
+    if (user) {
+      document.getElementById("pseudo").innerHTML = decodeURIComponent(user);
+    }
+  </script>
+</body>
+</html>

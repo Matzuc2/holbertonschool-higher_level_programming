@@ -1,9 +1,8 @@
-const url = "https://hellosalut.stefanbohacek.dev/?lang=fr"
-
-async function NicolasSarkozy() {
-    const FETCH = await fetch(url)
-    const response = await FETCH.json();
-    const DisBonjour = document.querySelector("#hello")
-    DisBonjour.innerHTML = response.hello
-}
-NicolasSarkozy();
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('https://hellosalut.stefanbohacek.dev/?lang=fr')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('hello').textContent = data.hello;
+        })
+        .catch(error => console.error('Error:', error));
+});

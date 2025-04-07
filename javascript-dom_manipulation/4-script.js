@@ -1,7 +1,3 @@
-document.getElementById("add_item").onclick = function() {
-    const ul = document.querySelector("ul.my_list");
-    const li = document.createElement("li");
-    const Item = "Item";
-    li.textContent = Item;
-    ul.appendChild(li);
+document.getElementById('add_item').onclick = function() {
+	document.querySelector('UL.my_list').appendChild(document.createElement('li')).textContent = 'Item';
 }
